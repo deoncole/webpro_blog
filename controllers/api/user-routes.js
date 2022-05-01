@@ -42,6 +42,7 @@ router.post('/', (req,res) => {
     // use sequelize .create() add a user
     User.create({
         username: req.body.username,
+        email: req.body.email,
         password: req.body.password
     })
     // check the promise, if false show error message if true respond with json data
@@ -52,9 +53,32 @@ router.post('/', (req,res) => {
     });
 });
 
+// route to have the user login. use the post method for access to the req.body
+router.post('/login', (req, res) => {
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    })
+    .then(dbUserData => {
+        if(!dbUserData){
+            res.status(400).json({ message: 'No User with that Username found!'});
+            return;
+        }
+        const validPw = dbUserData.checkPassword(req.body.password);
+        // validate the user
+        if(!validPw){
+            res.status(400).json({ message:'Incorrect Password!'});
+            return;
+        }
+        res.json({user: dbUserData, message:'You are logged in!!'});
+    });
+});
+
 router.put('/:id', (req,res) => {
     // use sequelize .update() to update one user's info by their id
     User.update(req.body, {
+        individualHooks: true,
         where:{
             id: req.params.id
         }
