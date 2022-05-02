@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         .then(dbPostData => {
             // serialize the entire array of the posts in the datbase
             const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('homepage', { posts });
+            res.render('homepage', { posts, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);
