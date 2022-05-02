@@ -46,11 +46,14 @@ router.post('/', (req,res) => {
         password: req.body.password
     })
     // check the promise, if false show error message if true respond with json data
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err=> {
-        console.log(err);
-        res.status(500).json(err);
-    });
+    .then(dbUserData => {
+        // save the session once the user is logged in
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+        });
+    })
 });
 
 // route to have the user login. use the post method for access to the req.body
@@ -71,7 +74,14 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message:'Incorrect Password!'});
             return;
         }
-        res.json({user: dbUserData, message:'You are logged in!!'});
+        // save the session once the user is logged in
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+            
+            res.json({user: dbUserData, message:'You are logged in!!'});
+        });
     });
 });
 
