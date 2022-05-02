@@ -127,5 +127,16 @@ router.delete('/:id', (req,res) => {
     });
 });
 
+router.post('/logout', (req,res) => {
+    // check if the user is logged in and if so end the session else alert the user
+    if(req.session.loggedIn){
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end()
+    }
+});
+
 // export the router
 module.exports = router
