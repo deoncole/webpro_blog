@@ -72,6 +72,48 @@ a:nth-child(4) {
     color: #7d7d7d;
 }
 
+.user_info {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+form label {
+    display: block;
+}
+
+textarea,
+input {
+    padding: 5.5%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+textarea:focus,
+input:focus {
+    outline: none;
+    border: 1px solid #3486eb;
+}
+
+form>div {
+    margin-bottom: 6%;
+}
+
+button {
+    background-color: #225ca3;
+    border: 0;
+    padding: 9%;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color .1s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #3486eb;
+}
+
 footer {
     margin-top: 50px;
     border-top: 1px solid #ccc;
