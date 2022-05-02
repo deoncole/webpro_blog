@@ -1,0 +1,16 @@
+{{!-- homepage of the app that is used to display all of the post. use the each helper to loop through the posts and create list element --}}
+<ol class="post-list">
+  {{#each posts as |posts|}}
+  <li>
+    <article class="post">
+      <div class="title">
+        <a href="{{post_url}}" target="_blank">{{title}}</a>
+        <span>({{post_url}})</span>
+      </div>
+      <div class="meta">
+        created by {{user.username}} on {{created_at}}
+      </div>
+    </article>
+  </li>
+  {{/each}}
+</ol>
