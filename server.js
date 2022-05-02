@@ -12,8 +12,10 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 // require the sequel store to connect the session
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// require the helper file
+const helpers = require('./utils/helpers');
 // variable to hold the handlebars
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 
 //set up the session and connect it to the database
 const sess = {

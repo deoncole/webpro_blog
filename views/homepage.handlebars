@@ -5,10 +5,10 @@
     <article class="post">
       <div class="title">
         <a href="{{post_url}}" target="_blank">{{title}}</a>
-        <span>({{post_url}})</span>
+        <span>({{format_url post_url}})</span>
       </div>
       <div class="meta">
-        created by {{user.username}} on {{created_at}}
+        created by {{user.username}} on {{format_date created_at}}
       </div>
     </article>
   </li>
