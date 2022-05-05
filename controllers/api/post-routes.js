@@ -1,15 +1,24 @@
 // require the router
 const router = require('express').Router();
 // require the models
-const { Post, User } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 
 // set up the api routes that will be used for CRUD to the post table. GET all the posts, GET the post by id, add a new post through POST, UPDATE the post through PUT, and DELETE the post.
 router.get('/', (req,res)=>{
-    // use sequelize .findAll() to get all of the posts only pulling the designated attributes
+    // use sequelize .findAll() to get all of the posts only pulling the designated attributes and order by descending
     Post.findAll({
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: ['id', 'post_comment', 'title', 'created_at'],
+        order: [['created_at', 'DESC']],
         // join in the user table on the username using include
         include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                  model: User,
+                  attributes: ['username']
+                }
+              },
             {
                 model: User,
                 attributes: ['username']
@@ -29,9 +38,17 @@ router.get('/:id', (req,res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: ['id', 'post_comment', 'title', 'created_at'],
         // join the user table by the username
         include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                  model: User,
+                  attributes: ['username']
+                }
+              },
             {
                 model: User,
                 attributes: ['username']
@@ -55,7 +72,7 @@ router.post('/', (req,res)=>{
     // use sequelize .create() to add a post
     Post.create({
         title: req.body.title,
-        post_url: req.body.post_url,
+        post_comment: req.body.post_comment,
         user_id: req.body.user_id
     })
     .then(dbPostData => res.json(dbPostData))

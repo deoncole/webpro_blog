@@ -114,6 +114,20 @@ button:hover {
     background-color: #3486eb;
 }
 
+.post-info {
+    margin: 10;
+    padding: 8px;
+    background-color: #ffffff;
+}
+
+.post-created {
+    font-size: 12px;
+}
+
+.comment {
+    margin-top: 50px;
+}
+
 footer {
     margin-top: 50px;
     border-top: 1px solid #ccc;

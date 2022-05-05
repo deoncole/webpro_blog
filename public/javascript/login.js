@@ -31,15 +31,15 @@ async function loginFormHandler(event) {
     event.preventDefault();
 
     // query the document for the selectors by their id and set the text from text area to a variable
-    const email = document.querySelector('#email-login').value.trim();
+    const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
 
     // conditional to check if the user filled out the textareas. if so log the user in using the post route
-    if (email && password) {
+    if (username && password) {
         const response = await fetch('/api/users/login', {
             method: 'post',
             body: JSON.stringify({
-                email,
+                username,
                 password
             }),
             headers: { 'Content-Type': 'application/json' }

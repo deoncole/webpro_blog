@@ -1,7 +1,7 @@
 // require the express router
 const router = require('express').Router();
 // require the user from the models folder which will be used to access the database
-const {User} = require('../../models')
+const {User, Post, Comment} = require('../../models')
 
 // set up the api routes that will be used for CRUD to the user table. GET all the users, GET the user by id, add a new user through POST, UPDATE the user through PUT, and DELETE the user.
 router.get('/', (req,res) => {
@@ -22,7 +22,21 @@ router.get('/:id', (req,res) => {
         attributes:{ exclude: ['password']},
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+              model: Post,
+              attributes: ['id', 'title', 'post_comment', 'created_at']
+            },
+            {
+              model: Comment,
+              attributes: ['id', 'comment_text', 'created_at'],
+              include: {
+                model: Post,
+                attributes: ['title']
+              }
+            }
+          ]
     })
     // check the promise, if false show error message if true respond with json data
     .then(dbUserData => {
@@ -42,7 +56,6 @@ router.post('/', (req,res) => {
     // use sequelize .create() add a user
     User.create({
         username: req.body.username,
-        email: req.body.email,
         password: req.body.password
     })
     // check the promise, if false show error message if true respond with json data
@@ -60,7 +73,7 @@ router.post('/', (req,res) => {
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
-            email: req.body.email
+            username: req.body.username
         }
     })
     .then(dbUserData => {

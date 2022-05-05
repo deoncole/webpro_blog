@@ -13,11 +13,12 @@
         <div class="navlinks">
             <nav>
                 {{#if loggedIn}}
-                <a href="#">Home</a>
-                <a href="#">Dashboard</a>
+                {{!-- update href for home and dashboard when they are clicked --}}
+                <a href="/" >Home</a>
+                <a href="/dashboard" >Dashboard</a>
                 <a href="#" id="logout">Logout</a>
                 {{else}}
-                <a href="#">Login</a>
+                <a href="/login">Login</a>
                 {{/if}}
             </nav>
         </div>
