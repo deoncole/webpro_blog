@@ -1,6 +1,6 @@
 async function editFormHandler(event) {
     event.preventDefault();
-
+    
     // get the content in the text areas
     const title = document.querySelector('input[name="user-post-title"]').value.trim();
     const post_comment = document.querySelector('input[name="user-post-content"]').value.trim();
@@ -30,4 +30,4 @@ async function editFormHandler(event) {
     }
 }
   
-document.querySelector('#save-post-btn').addEventListener('submit', editFormHandler);
+document.querySelector('#save-post-btn').addEventListener('click', editFormHandler);
