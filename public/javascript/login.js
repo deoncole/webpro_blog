@@ -4,22 +4,20 @@ async function signupFormHandler(event) {
 
     // query the document for the selectors by their id and set the text from text area to a variable
     const username = document.querySelector('#username-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
-
+    
     // conditional to check if the user filled out the textarea. if so create a new user using the post route
-    if (username && email && password) {
-        const response = await fetch('api/users', {
-            method: 'post',
+    if (username && password) {
+        const response = await fetch('/api/users', {
+            method: 'POST',
             body: JSON.stringify({
                 username,
-                email,
                 password
             }),
             headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
-            console.log('Success!!');
+            document.location.replace('/dashboard/');
         } else {
             alert(response.statusText);
         }
@@ -46,7 +44,7 @@ async function loginFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/dashboard/');
         } else {
             alert(response.statusText);
         }

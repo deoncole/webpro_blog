@@ -2,6 +2,7 @@
 const router = require('express').Router();
 // require the models
 const { Post, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // set up the api routes that will be used for CRUD to the post table. GET all the posts, GET the post by id, add a new post through POST, UPDATE the post through PUT, and DELETE the post.
 router.get('/', (req,res)=>{
@@ -68,12 +69,12 @@ router.get('/:id', (req,res) => {
     });
 });
 
-router.post('/', (req,res)=>{
+router.post('/',(req,res)=>{
     // use sequelize .create() to add a post
     Post.create({
         title: req.body.title,
         post_comment: req.body.post_comment,
-        user_id: req.body.user_id
+        user_id: req.session.user_id
     })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {

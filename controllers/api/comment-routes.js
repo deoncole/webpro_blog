@@ -4,7 +4,7 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // set up the api routes that will be used for CRUD to the post table. GET all the comments, add a new comment through POST, and DELETE the comment.
-router.get('/', (req, res) => {
+router.get('/',(req, res) => {
   Comment.findAll()
     .then(dbCommentData => res.json(dbCommentData))
     .catch(err => {
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', withAuth,(req, res) => {
+router.post('/', (req, res) => {
   //check if the session is active
   if (req.session){
       Comment.create({
@@ -29,7 +29,7 @@ router.post('/', withAuth,(req, res) => {
   }
 });
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
   Comment.destroy({
     where: {
       id: req.params.id

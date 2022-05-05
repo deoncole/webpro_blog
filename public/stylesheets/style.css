@@ -105,6 +105,17 @@ input:focus {
     cursor: pointer;
     border-radius: 5px;
 }
+.dashBtn {
+    background-color: #225ca3;
+    border: 0;
+    padding: 9%;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color .1s;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
 button:hover {
     background-color: #3486eb;
@@ -148,11 +159,47 @@ textarea {
     height: 43px;
     border-radius: 5px;
 }
+.saveBtn{
+    background-color: #47bf47;
+    border: 0;
+    color: #ffffff;
+    width: 136px;
+    height: 43px;
+    border-radius: 5px; 
+}
+.deleteBtn {
+    background-color: #c82323;
+    border: 0;
+    color: #ffffff;
+    width: 136px;
+    height: 43px;
+    border-radius: 5px;
+}
 
 .comment-info {
     background-color: #ffffff;
     border-radius: 20px;
     padding-left: 25px;
+}
+
+#post-title{
+    border-radius: 5px;
+    border: 1px solid #FF9212;
+    font-size: 20px;
+    padding: 7px
+}
+
+#post-content{
+    width: 32%;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #FF9212;
+    font-size: 20px;
+    
+}
+
+.post-section{
+    margin-top: 10px;
 }
 
 footer {

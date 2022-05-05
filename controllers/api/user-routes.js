@@ -1,7 +1,8 @@
 // require the express router
 const router = require('express').Router();
 // require the user from the models folder which will be used to access the database
-const {User, Post, Comment} = require('../../models')
+const {User, Post, Comment} = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // set up the api routes that will be used for CRUD to the user table. GET all the users, GET the user by id, add a new user through POST, UPDATE the user through PUT, and DELETE the user.
 router.get('/', (req,res) => {
@@ -66,6 +67,10 @@ router.post('/', (req,res) => {
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
         });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
     })
 });
 
