@@ -9,8 +9,18 @@
         <div>
             <p class="post-created">Created {{format_date post.created_at}}</p>
         </div>
-        <h3>Comments:</h3>
     </div>
+    </div>
+        <form class="comment_form">
+            <div>
+                <textarea placeholder="Add a comment" name="comment-body"></textarea>
+            </div>
+            <div>
+                <button class="commentBtn" type="submit">Post A Comment</button>
+            </div>
+        </form>
+    <div>
+    <h3>Comments:</h3>
     <div class="comment-info">
         {{#each post.comments}}
         <section class="comment">
@@ -25,5 +35,6 @@
         </section>
         {{/each}}
     </div>
-
 </section>
+
+<script src="/javascript/comment.js"></script>
