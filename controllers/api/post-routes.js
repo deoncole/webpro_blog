@@ -87,7 +87,8 @@ router.put('/:id', (req, res) => {
     // use sequelize .update() to update one post's info by its id
     Post.update(
         {
-            title: req.body.title
+            title: req.body.title,
+            post_comment: req.body.post_comment
         },
         {
             where: {
